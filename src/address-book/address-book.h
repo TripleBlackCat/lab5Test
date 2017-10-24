@@ -45,6 +45,7 @@ public:
 	*/
 	AddressBookEntry(const Person& person, const string& image_filename = "");
     AddressBookEntry(const AddressBookEntry& rhs);
+    AddressBookEntry& operator=(const AddressBookEntry& rhs);
 	// Relies on the compiler-provided copy constructor
 	// Relies on the compiler-provided assignment operator
 
@@ -52,6 +53,7 @@ public:
 	void setImageName(string newname);
 	Person getPerson() const { return _person; }
 	void setPerson(Person person) { _person = person; }
+    void swap(AddressBookEntry& newObject);
 
 private:
 	Person _person;					//!< Contains the name and age of the person

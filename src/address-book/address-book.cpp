@@ -2,6 +2,7 @@
 // Implementation of the AddressBookEntry class
 #include "address-book.h"
 #include <memory>
+#include <algorithm>
 using std::make_unique;
 
 // AddressBookEntry Constructor
@@ -34,4 +35,15 @@ AddressBookEntry::AddressBookEntry(const AddressBookEntry& rhs) :
     if (rhs._image_ptr != nullptr) _image_ptr = make_unique<Image>(*rhs._image_ptr);
 }
 
+AddressBookEntry& AddressBookEntry::operator=(const AddressBookEntry& rhs)
+{
+    AddressBookEntry temp(rhs);
+    swap(temp);
+    return *this;
+}
 
+void AddressBookEntry::swap(AddressBookEntry& newObject)
+{
+    std::swap(newObject._person,_person);
+    std::swap(newObject._image_ptr,_image_ptr);
+}
