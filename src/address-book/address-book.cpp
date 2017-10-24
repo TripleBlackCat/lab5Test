@@ -2,7 +2,7 @@
 // Implementation of the AddressBookEntry class
 #include "address-book.h"
 #include <memory>
-using std::make_shared;
+using std::make_unique;
 
 // AddressBookEntry Constructor
 AddressBookEntry::AddressBookEntry(	const Person& person,
@@ -12,7 +12,7 @@ AddressBookEntry::AddressBookEntry(	const Person& person,
 	// dynamically allocate memory for the image
 	if (image_filename != "") {
 		// ignore (for now) what will happen if there is a memory allocation failure
-        _image_ptr = make_shared<Image>(image_filename);
+        _image_ptr = make_unique<Image>(image_filename);
 	}
 }
 
@@ -27,3 +27,11 @@ void AddressBookEntry::setImageName(string newname)
 {
 	if (_image_ptr != nullptr) _image_ptr->name(newname);
 }
+
+AddressBookEntry::AddressBookEntry(const AddressBookEntry& rhs) :
+    _person{rhs.getPerson()}
+{ 
+    if (rhs._image_ptr != nullptr) _image_ptr = make_unique<Image>(*rhs._image_ptr);
+}
+
+
