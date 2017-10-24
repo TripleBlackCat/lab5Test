@@ -47,3 +47,8 @@ void AddressBookEntry::swap(AddressBookEntry& newObject)
     std::swap(newObject._person,_person);
     std::swap(newObject._image_ptr,_image_ptr);
 }
+
+//This assignment is not an atomic operation because the object Person gets assigned, in which the object itself
+//may not have atomic assignment, which may result in only some of its fields being assigned and others not, but
+//still passing through. This affects the atomic assignment of the AddressBookEntry, making it not atomic. The
+//correct error checks are also not implemented.
